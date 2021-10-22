@@ -45,11 +45,39 @@ def get_permutationsWay2(arr, left, right, permutations):
 def swap(arr, i,j):
     arr[i], arr[j] = arr[j], arr[i]
             
-            
+#=========================================================>
+# Way 3, using the concept of backtracking. 
+# Only problem is with thte result array which has to be fixed. 
+def get_permutationsWay3(result, arr, permutation, used):
     
+    if (len(permutation)== len(arr)):
+        print("result, permutation",result, permutation)
+        result = result + [permutation]
+        #result.extend(permutation)
+        #print("result",result)
+        return
+    
+    for i in range(len(arr)):
+        if (not used[i]):
+            used[i] = True
+            permutation.append(arr[i])
+            get_permutationsWay3(result, arr, permutation, used)
+            used[i] = False
+            permutation.pop()
+    return result
     
     
 arr = [1,2,3]
 #arr = "ABC"
 #print(get_permutations(arr))
-print(main(arr))
+result = []
+#=============================>
+
+# =============================================================================
+# print(main(arr))
+# =============================================================================
+#====================================>
+# way of solving permutation problem with the help of backtracking.
+permutation = []
+used = [False]*len(arr)
+print(get_permutationsWay3(result, arr, permutation, used))
